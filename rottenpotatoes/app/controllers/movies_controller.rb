@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  
+
   def movie_params
     params.require(:movie).permit(:title, :rating, :description, :release_date, :director)
   end
@@ -9,6 +9,11 @@ class MoviesController < ApplicationController
     @movie = Movie.find(id) # look up movie by unique ID
     # will render app/views/movies/show.<extension> by default
   end
+
+  def similar
+    @movies = Movie.find_similar(params[:id])
+  end
+
 
   def index
     sort = params[:sort] || session[:sort]
@@ -20,11 +25,11 @@ class MoviesController < ApplicationController
     end
     @all_ratings = Movie.all_ratings
     @selected_ratings = params[:ratings] || session[:ratings] || {}
-    
+
     if @selected_ratings == {}
       @selected_ratings = Hash[@all_ratings.map {|rating| [rating, rating]}]
     end
-    
+
     if params[:sort] != session[:sort] or params[:ratings] != session[:ratings]
       session[:sort] = sort
       session[:ratings] = @selected_ratings

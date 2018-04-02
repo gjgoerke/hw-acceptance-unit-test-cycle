@@ -18,14 +18,17 @@ module NavigationHelpers
 
     when /^the edit page for "Alien"$/
       '/movies/3/edit'
-      
+
     when /^the "Alien" movie update page$/
       '/movies/3/'
-      
+
     when /^the details page for "Star Wars"$/
       '/movies/1/'
-      
-    # Add more mappings here.
+
+    when /^the Similar Movies page for "Star Wars"$/
+      '/movies/1/similar'
+
+    #  Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
     #   when /^(.*)'s profile page$/i
